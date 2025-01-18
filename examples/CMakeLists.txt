@@ -12,13 +12,13 @@ macro(add_example EXAMPLE)
   target_include_directories(
     ${EXAMPLE} 
     PRIVATE
-    ${EIGEN_INCLUDE_DIR}
     ${hpipm-cpp_INCLUDE_DIR}
   )
   target_link_libraries(
     ${EXAMPLE} 
     PRIVATE
     hpipm-cpp::hpipm-cpp
+    Eigen3::Eigen
   )
 endmacro()
 

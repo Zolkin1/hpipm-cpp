@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.11)
 project(hpipm-cpp CXX)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 
 #############
 ## Options ##
@@ -37,11 +37,11 @@ target_link_libraries(
   PUBLIC
   ${blasfeo_DIR}/../lib/libblasfeo.so
   ${hpipm_DIR}/../lib/libhpipm.so
+  Eigen3::Eigen
 )
 target_include_directories(
   ${PROJECT_NAME} 
   PUBLIC
-  ${EIGEN3_INCLUDE_DIR}
   $<BUILD_INTERFACE:${blasfeo_DIR}/../include>
   $<BUILD_INTERFACE:${hpipm_DIR}/../include>
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
