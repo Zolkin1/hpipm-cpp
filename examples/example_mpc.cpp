@@ -114,10 +114,12 @@ int main() {
     std::cout << "t: " << t << ", x: " << x.transpose() << std::endl;
     x0 = x;
     if (solver.solve(x0, qp, solution) != hpipm::HpipmStatus::Success) return 1;
+    std::cout << solver.getSolverStatistics() << std::endl;
     const auto u0 = solution[0].u;
     x = A * x + B * u0 + b;
   }
 
   std::cout << "t: " << sim_steps << ", x: " << x.transpose() << std::endl;
+
   return 0;
 }
