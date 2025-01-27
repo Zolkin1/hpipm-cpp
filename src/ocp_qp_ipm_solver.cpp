@@ -335,6 +335,7 @@ HpipmStatus OcpQpIpmSolver::solve(const Eigen::VectorXd& x0,
 
   // get solution
   qp_sol[0].x = x0;
+  std::cout << "x0 out: " << qp_sol[0].x.transpose() << std::endl;
   for (int i=0; i<dim_.N; ++i) {
     d_ocp_qp_sol_get_x(i+1, ocp_qp_sol_ptr, qp_sol[i+1].x.data());
     d_ocp_qp_sol_get_u(i, ocp_qp_sol_ptr, qp_sol[i].u.data());

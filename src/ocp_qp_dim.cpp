@@ -74,8 +74,8 @@ void OcpQpDim::checkSize(const std::vector<OcpQp>& ocp_qp) const {
     if (ocp_qp[i].B.cols() != nu[i]) {
       throw std::runtime_error("ocp_qp[" + std::to_string(i) + "].B.cols() must be " + std::to_string(nu[i]));
     }
-    if (ocp_qp[i].b.size() != nx[i]) {
-      throw std::runtime_error("ocp_qp[" + std::to_string(i) + "].b.size() must be " + std::to_string(nx[i]));
+    if (ocp_qp[i].b.size() != nx[i+1]) {
+      throw std::runtime_error("ocp_qp[" + std::to_string(i) + "].b.size() must be " + std::to_string(nx[i+1]));
     }
   }
   // cost
