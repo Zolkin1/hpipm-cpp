@@ -224,7 +224,7 @@ HpipmStatus OcpQpIpmSolver::solve(const Eigen::VectorXd& x0,
   // set QP data
   b0_.noalias() = ocp_qp[0].A * x0 + ocp_qp[0].b;
   for (int i=0; i<dim_.N; ++i) {
-    A_ptr_[i] = ocp_qp[i].A.data();
+    A_ptr_[i] = ocp_qp[i].A.data();   //TODO: Should this be here for i == 0?
     B_ptr_[i] = ocp_qp[i].B.data();
     if (i == 0) {
       b_ptr_[i] = b0_.data();
@@ -233,7 +233,7 @@ HpipmStatus OcpQpIpmSolver::solve(const Eigen::VectorXd& x0,
       b_ptr_[i] = ocp_qp[i].b.data();
     }
   }
-  r0_.noalias() = ocp_qp[0].S * x0 + ocp_qp[0].r;
+  r0_.noalias() = ocp_qp[0].S * x0 + ocp_qp[0].r; // TODO: Shouldn't I have this for q0 too?
   for (int i=0; i<dim_.N; ++i) {
     Q_ptr_[i] = ocp_qp[i].Q.data();
     S_ptr_[i] = ocp_qp[i].S.data();
@@ -381,7 +381,7 @@ HpipmStatus OcpQpIpmSolver::solve(const Eigen::VectorXd& x0,
   int stat_m;
   d_ocp_qp_ipm_get_stat_m(ocp_qp_ipm_ws_ptr, &stat_m);
   solver_statistics_.clear();
-  solver_statistics_.reserve(solver_statistics_.iter+2);
+  solver_statistics_.reserve(solver_statistics_.iter+2); // TODO: Why is this +2?
   for (int i=0; i<=solver_statistics_.iter+1; ++i) {
     solver_statistics_.alpha_aff.push_back(ocp_qp_ipm_ws_ptr->stat[stat_m*i+0]);
     solver_statistics_.mu_aff.push_back(ocp_qp_ipm_ws_ptr->stat[stat_m*i+1]);

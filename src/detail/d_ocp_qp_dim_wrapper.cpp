@@ -1,6 +1,7 @@
 #include "hpipm-cpp/detail/d_ocp_qp_dim_wrapper.hpp"
 
 #include <cstdlib>
+#include <iostream>
 #include <stdexcept>
 #include <string>
 

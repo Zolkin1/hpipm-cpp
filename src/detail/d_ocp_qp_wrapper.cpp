@@ -1,6 +1,8 @@
 #include "hpipm-cpp/detail/d_ocp_qp_wrapper.hpp"
 
 #include <cstdlib>
+#include <iostream>
+#include <ostream>
 #include <stdexcept>
 #include <string>
 
@@ -129,8 +131,11 @@ void d_ocp_qp_wrapper::resize(const std::shared_ptr<d_ocp_qp_dim_wrapper>& dim) 
   memsize_ = std::max(memsize_, new_memsize);
   if (memory_ == nullptr) {
     memory_ = malloc(memsize_);
+    // NOTE When this was outside the if statement then it seemed to be causing a fair amount of cache misses
+    d_ocp_qp_create(dim_->get(), &ocp_qp_hpipm_, memory_);
   }
-  d_ocp_qp_create(dim_->get(), &ocp_qp_hpipm_, memory_);
+  // d_ocp_qp_create(dim_->get(), &ocp_qp_hpipm_, memory_);
+  // std::cerr << "d_ocp_create called!" << std::endl;
 }
 
 

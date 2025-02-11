@@ -150,8 +150,11 @@ void d_ocp_qp_ipm_ws_wrapper::resize(const std::shared_ptr<d_ocp_qp_dim_wrapper>
   memsize_ = std::max(memsize_, new_memsize);
   if (memory_ == nullptr) {
     memory_ = malloc(memsize_);
+    // NOTE: Moving this inside this if statement seems to help a lot with cache friendlyness
+    d_ocp_qp_ipm_ws_create(dim_->get(), ipm_arg_->get(), &ocp_qp_ipm_ws_hpipm_, memory_);
   }
-  d_ocp_qp_ipm_ws_create(dim_->get(), ipm_arg_->get(), &ocp_qp_ipm_ws_hpipm_, memory_);
+  // TODO: Doesn't this get called everytime? Isn't that uncessary?
+  // d_ocp_qp_ipm_ws_create(dim_->get(), ipm_arg_->get(), &ocp_qp_ipm_ws_hpipm_, memory_);
 }
 
 } // namespace hpipm
